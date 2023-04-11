@@ -1,5 +1,4 @@
-package org.example;
-
+              
 import java.io.*;
 import java.net.*;
 
@@ -7,7 +6,7 @@ public class EchoServer {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(8189); // porta utilizada pelo servidor
-
+		
             while (true) {
                 Socket clientSocket = serverSocket.accept(); // aguarda conexão com o cliente
                 System.out.println("Servidor em funcionamento");
@@ -26,19 +25,17 @@ public class EchoServer {
                     long freeSpace = file.getFreeSpace() / (1024*1024); // espaço livre em megabytes
                     out.println("Espaço livre no HD: " + freeSpace + " MB");
                 } else if (message.equals("3")) {
-                    int count = 0;
-                    for (Thread t : Thread.getAllStackTraces().keySet()) {
-                        if (t.getName().startsWith("main")) {
-                            count++;
-                        }
-                    }
-                    out.println("Quantidade de aplicações em Java: " + count);
-                } else {
+                    out.println("Sistema operacional: " + System.getProperty("os.name") + "  Versão: " + System.getProperty("os.version") );
+                } else if (message.equals("BYE")) {
+                	// fechamento de conexão com o cliente
+               		clientSocket.close();
+			break; 
+		} else {
                     out.println("Opção inválida!");
                 }
 
-                // fechamento de conexão com o cliente
-                clientSocket.close();
+                
+               
             }
         } catch (IOException e) {
             e.printStackTrace();
