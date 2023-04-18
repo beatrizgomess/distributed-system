@@ -1,4 +1,5 @@
-              
+package org.example.condicionais;
+
 import java.io.*;
 import java.net.*;
 
@@ -6,10 +7,10 @@ public class EchoServer {
     public static void main(String[] args) {
         try {
             ServerSocket serverSocket = new ServerSocket(8189); // porta utilizada pelo servidor
-		
-            while (true) {
-                Socket clientSocket = serverSocket.accept(); // aguarda conexão com o cliente
+		 Socket clientSocket = serverSocket.accept(); // aguarda conexão com o cliente
                 System.out.println("Servidor em funcionamento");
+            while (true) {
+               
                 // criação de objetos para leitura e escrita de dados
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
